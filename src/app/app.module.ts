@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { ChartComponent } from './chart/chart.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    LeafletModule
   ],
   providers: [],
   bootstrap: [AppComponent]
