@@ -5,7 +5,7 @@
                     <div class="">
                          <h5 class="mt-5">View country detail</h5>
                          <h1>Confirmed Cases by Country</h1>
-                         <div class="datasearch mb-5">
+                         <div class="datasearch mb-3">
                               <label for="exampleDataList" class="form-label">Select country to view</label>
                               <input class="form-control" list="datalistOptions" id="exampleDataList"
                                    placeholder="Type to search..." (change)="onChange($event)">
@@ -15,6 +15,7 @@
                               <p><i>* Select in map for more detail</i></p>
                          </div>
                          <div class="row detail-row" style="width: 100%;"  *ngIf="total > 0">
+                            <p>Viewing detail for: {{ country }}</p>
                               <div class="col-xl-6 col-12 mb-4">
                                   <div class="card noback">
                                       <div class="card-body">

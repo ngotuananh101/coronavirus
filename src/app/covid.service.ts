@@ -15,6 +15,10 @@ export class CovidService {
   dataResultSubject: BehaviorSubject<Latest[]> = new BehaviorSubject<Latest[]>(this.data);
   dataResult$: Observable<Latest[]> = this.dataResultSubject.asObservable();
 
+  active!: Latest;
+  activeResultSubject: BehaviorSubject<Latest> = new BehaviorSubject<Latest>(this.active);
+  activeResult$: Observable<Latest> = this.activeResultSubject.asObservable();
+
   brief!: Brief;
   briefResultSubject: BehaviorSubject<Brief> = new BehaviorSubject<Brief>(this.brief);
   briefResult$: Observable<Brief> = this.briefResultSubject.asObservable();

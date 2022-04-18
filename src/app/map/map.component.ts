@@ -11,8 +11,10 @@ import { Latest } from '../model/latest.model';
 export class MapComponent {
 
   map!: Map;
-
   data!: Latest[];
+  total: number = 0;
+  deaths: number = 0;
+  country: string = "";
 
   options = {
     layers: [
@@ -40,6 +42,11 @@ export class MapComponent {
     this._covid.dataResultSubject.subscribe(data => {
       this.data = data;
     });
+    this._covid.activeResultSubject.subscribe(data => {
+      this.total = data.confirmed;
+      this.deaths = data.deaths;
+      this.country = data.countryregion;
+    });
   }
 
   onMapReady(map: Map) {
@@ -60,19 +67,13 @@ export class MapComponent {
                                 <br>Recovered: ${element.recovered}</p>`);
       })});
   }
-
-  total: number = 0;
-  deaths: number = 0;
-
   onChange(event: any) {
     let value = event.target.value;
     this.data.forEach(element => {
-      if (element.countryregion === value) {
+      if (element.countryregion == value) {
         this.map.setView([element.location.lat, element.location.lng], 6);
-        this.total = element.confirmed;
-        this.deaths = element.deaths;
+        this._covid.activeResultSubject.next(element);
       }
     });
   };
-
 }
