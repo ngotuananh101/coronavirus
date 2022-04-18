@@ -4,5 +4,6 @@ export interface Brief {
     recovered: number;
     active: number;
     lastUpdate: string;
-    country: string;
+    country: number;
+    today: number;
 }
