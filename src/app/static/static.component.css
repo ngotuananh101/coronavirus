@@ -1,6 +1,6 @@
 #intro {
     background-image: url("/assets/images/tracker-map-bg.png");
-    height: 100vh;
+    height: 100%;
 }
 .card-body i{
     font-size: 3rem;

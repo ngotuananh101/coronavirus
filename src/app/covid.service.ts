@@ -15,11 +15,11 @@ export class CovidService {
   dataResultSubject: BehaviorSubject<Latest[]> = new BehaviorSubject<Latest[]>(this.data);
   dataResult$: Observable<Latest[]> = this.dataResultSubject.asObservable();
 
-  private BaseUrl = 'https://master-covid-19-api-laeyoung.endpoint.ainize.ai/jhu-edu/latest';
-
   brief!: Brief;
   briefResultSubject: BehaviorSubject<Brief> = new BehaviorSubject<Brief>(this.brief);
   briefResult$: Observable<Brief> = this.briefResultSubject.asObservable();
+
+  private BaseUrl = 'https://master-covid-19-api-laeyoung.endpoint.ainize.ai/jhu-edu/latest?onlyCountries=true';
 
   getData() {
     this._http.get(this.BaseUrl).subscribe((data: any) => {

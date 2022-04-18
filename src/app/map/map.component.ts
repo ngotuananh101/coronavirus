@@ -51,7 +51,7 @@ export class MapComponent {
           color: 'red',
           fillColor: '#f03',
           fillOpacity: 0.7,
-          radius: (element.confirmed / 100000) > min ? (element.confirmed / 1000000) : (element.confirmed / 10000)
+          radius: (element.confirmed / 700000) > min ? (element.confirmed / 700000) : (element.confirmed / 100000)
         }).addTo(map).bindPopup(`<p>Country: ${element.countryregion}
                                 <br>Last Update: ${element.lastupdate}
                                 <br>Location: lat=${element.location.lat}, long=${element.location.lng}
@@ -60,5 +60,19 @@ export class MapComponent {
                                 <br>Recovered: ${element.recovered}</p>`);
       })});
   }
+
+  total: number = 0;
+  deaths: number = 0;
+
+  onChange(event: any) {
+    let value = event.target.value;
+    this.data.forEach(element => {
+      if (element.countryregion === value) {
+        this.map.setView([element.location.lat, element.location.lng], 6);
+        this.total = element.confirmed;
+        this.deaths = element.deaths;
+      }
+    });
+  };
 
 }

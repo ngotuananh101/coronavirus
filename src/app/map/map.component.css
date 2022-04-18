@@ -1,6 +1,9 @@
 
 .map {
-    height: 50%;
+    height: 60vh;
     padding: 0;
 }
-  
+
+.detail-row img{
+    width: 80%;
+}

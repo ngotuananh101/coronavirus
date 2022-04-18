@@ -1,4 +1,88 @@
-
-<div class="map" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"
-     [leafletLayersControl]="layersControl">
+<div class="main2 d-flex">
+     <div class="container">
+          <div class="row">
+               <div class="col-xl-5 col-12 d-flex justify-content-center align-items-center">
+                    <div class="">
+                         <h5 class="mt-5">View country detail</h5>
+                         <h1>Confirmed Cases by Country</h1>
+                         <div class="datasearch mb-5">
+                              <label for="exampleDataList" class="form-label">Select country to view</label>
+                              <input class="form-control" list="datalistOptions" id="exampleDataList"
+                                   placeholder="Type to search..." (change)="onChange($event)">
+                              <datalist id="datalistOptions">
+                                   <option value="{{ item.countryregion }}" *ngFor="let item of data">
+                              </datalist>
+                              <p><i>* Select in map for more detail</i></p>
+                         </div>
+                         <div class="row detail-row" style="width: 100%;"  *ngIf="total > 0">
+                              <div class="col-xl-6 col-12 mb-4">
+                                  <div class="card noback">
+                                      <div class="card-body">
+                                          <div class="d-flex justify-content-between px-md-1">
+                                              <div class="align-self-center me-1">
+                                                  <img src="assets/images/icon/corona-yellow-1.png" alt="" />
+                                              </div>
+                                              <div class="text-start">
+                                                  <h3>{{ total }}</h3>
+                                                  <p class="mb-0">Total Cases</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-xl-6 col-12 mb-4">
+                                  <div class="card noback">
+                                      <div class="card-body">
+                                          <div class="d-flex justify-content-between px-md-1">
+                                              <div class="align-self-center me-1">
+                                                  <img src="assets/images/icon/corona-black-1.png" alt="" />
+                                              </div>
+                                              <div class="text-start">
+                                                  <h3>{{ deaths }}</h3>
+                                                  <p class="mb-0">Total Deaths</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-xl-6 col-12 mb-4">
+                                   <div class="card noback">
+                                       <div class="card-body">
+                                           <div class="d-flex justify-content-between px-md-1">
+                                               <div class="align-self-center me-1">
+                                                   <img src="assets/images/icon/corona-green-1.png" alt="" />
+                                               </div>
+                                               <div class="text-start">
+                                                   <h3>unknown</h3>
+                                                   <p class="mb-0">Recovered</p>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                              <div class="col-xl-6 col-12 mb-4">
+                                  <div class="card noback">
+                                      <div class="card-body">
+                                          <div class="d-flex justify-content-between px-md-1">
+                                              <div class="align-self-center me-1">
+                                                  <img src="assets/images/icon/corona-red-1.png" alt="" />
+                                              </div>
+                                              <div class="text-start">
+                                                  <h3>{{ deaths / total * 100 | number }}%</h3>
+                                                  <p class="mb-0">Fatality Rate</p>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                    </div>
+               </div>
+               <div class="col-xl-7 col-sm-12 col-12">
+                    <div class="map" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)"
+                         [leafletLayersControl]="layersControl">
+                    </div>
+               </div>
+          </div>
+     </div>
 </div>
