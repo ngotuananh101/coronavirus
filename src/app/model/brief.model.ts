@@ -5,5 +5,4 @@ export interface Brief {
     active: number;
     lastUpdate: string;
     country: string;
-
 }
