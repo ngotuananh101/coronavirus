@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { latLng, Map, tileLayer, circle, circleMarker, point, polygon, marker } from 'leaflet';
-import { CovidService } from '../covid.service';
+import { CovidService } from '../service/covid.service';
 import { Latest } from '../model/latest.model';
+import { WeatherService } from '../service/weather.service';
 
 @Component({
   selector: 'app-map',
@@ -35,7 +36,7 @@ export class MapComponent {
     }
   };
 
-  constructor(private _covid: CovidService) {
+  constructor(private _covid: CovidService, private _weather: WeatherService) {
   }
 
   ngOnInit(): void {
@@ -55,28 +56,32 @@ export class MapComponent {
   onMapReady(map: Map) {
     this.map = map;
     let min = 5;
-    this._covid.dataResultSubject.subscribe(data => {
-      data.forEach(element => {
-        circleMarker([element.location.lat, element.location.lng], {
-          color: 'red',
-          fillColor: '#f03',
-          fillOpacity: 0.7,
-          radius: (element.confirmed / 700000) > min ? (element.confirmed / 700000) : (element.confirmed / 100000)
-        }).addTo(map).bindPopup(`<p>Country: ${element.countryregion}
-                                <br>Last Update: ${element.lastupdate}
-                                <br>Location: lat=${element.location.lat}, long=${element.location.lng}
-                                <br>Confirmed: ${element.confirmed}
-                                <br>Deaths: ${element.deaths}
-                                <br>Recovered: ${element.recovered}</p>`);
-      })
-    });
+    setTimeout(() => {
+      this._covid.dataResultSubject.subscribe(data => {
+        data.forEach(element => {
+          circleMarker([element.location.lat, element.location.lng], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.7,
+            radius: (element.confirmed / 1000000) > min ? (element.confirmed / 1000000) : (element.confirmed / 100000) > min ? (element.confirmed / 100000): (element.confirmed / 10000)
+          }).addTo(map).bindPopup(`<p>Country: ${element.countryregion}
+                                  <br>Last Update: ${element.lastupdate}
+                                  <br>Location: lat=${element.location.lat}, long=${element.location.lng}
+                                  <br>Confirmed: ${element.confirmed}
+                                  <br>Deaths: ${element.deaths}
+                                  <br>Recovered: ${element.recovered}</p>`);
+        })
+      });
+    }, 300);
   }
   onChange(event: any) {
     let value = event.target.value;
     this.data.forEach(element => {
       if (element.countryregion == value) {
         this.map.setView([element.location.lat, element.location.lng], 6);
+        this._covid.getTimeSeries(element.countrycode.iso3);
         this._covid.activeSubject.next(element);
+        this._weather.getWeather(element.location.lat, element.location.lng);
       }
     });
   };

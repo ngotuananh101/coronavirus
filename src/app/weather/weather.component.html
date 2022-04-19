@@ -1,1 +1,15 @@
-<p>weather works!</p>
+<div class="card text-center" *ngIf="undefined !== currentWeather">
+    <div class="card-header"><b>{{ currentWeather.location.name }}({{ currentWeather.location.region }}, {{ currentWeather.location.country }})</b><br>Local time: {{ currentWeather.location.localtime | date }}</div>
+    <div class="card-body">
+        <h5 class="card-title">{{ currentWeather.current.condition.text }}</h5>
+        <img src="https:{{ currentWeather.current.condition.icon }}" class="img-fluid"/>
+        <h2 class="card-text">{{ currentWeather.current.temp_c }}&deg;C</h2>
+        <p class="card-text">(Feels Like {{ currentWeather.current.feelslike_c }}&deg;C)</p>
+    </div>
+    <div class="card-footer text-muted">
+        Humidity: {{ currentWeather.current.humidity }}% 
+        - Wind: {{ currentWeather.current.wind_kph }}km/h 
+        <br>Wind direction: {{ currentWeather.current.wind_dir }} 
+        - Pressure: {{ currentWeather.current.pressure_mb }}mb
+    </div>
+</div>

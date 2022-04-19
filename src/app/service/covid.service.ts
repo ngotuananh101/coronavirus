@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, max, Observable } from 'rxjs';
-import { Brief } from './model/brief.model';
-import { Latest } from './model/latest.model';
-import { Timeseries } from './model/timeseries.model';
+import { Brief } from '../model/brief.model';
+import { Latest } from '../model/latest.model';
+import { Timeseries } from '../model/timeseries.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,11 +35,11 @@ export class CovidService {
       this.data = data;
       this.dataResultSubject.next(this.data);
       this.setBrief();
-    })
+    });
   };
 
   getTimeSeries(country: string) {
-    let url = `https://master-covid-19-api-laeyoung.endpoint.ainize.ai/jhu-edu/timeseries?iso2=${country}&onlyCountries=true`;
+    let url = `https://master-covid-19-api-laeyoung.endpoint.ainize.ai/jhu-edu/timeseries?iso3=${country}&onlyCountries=true`;
     this._http.get(url).subscribe((data: any) => {
       this.timeseries = data[0];
       let value= Object.values(this.timeseries.timeseries);
@@ -61,13 +61,12 @@ export class CovidService {
     let recovered: number = 0;
     let active: number = 0;
     let lastUpdate = '';
-    let country: number = 0;
+    let country: number = this.data.length;
     let today: number = 0;
     this.data.forEach(element => {
       confirmed += element.confirmed > 0 ? element.confirmed : 0;
       deaths += element.deaths > 0 ? element.deaths : 0;
       recovered += element.recovered > 0 ? element.recovered : 0;
-      country += 1;
     });
     lastUpdate = this.data[0].lastupdate;
     this.brief = { confirmed, deaths, recovered, active, lastUpdate, country, today };

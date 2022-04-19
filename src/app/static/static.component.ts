@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CovidService } from '../covid.service';
+import { CovidService } from '../service/covid.service';
 import { Brief } from '../model/brief.model';
 import { Latest } from '../model/latest.model';
 
