@@ -63,7 +63,7 @@ export class MapComponent {
             color: 'red',
             fillColor: '#f03',
             fillOpacity: 0.7,
-            radius: (element.confirmed / 1000000) > min ? (element.confirmed / 1000000) : (element.confirmed / 100000) > min ? (element.confirmed / 100000): (element.confirmed / 10000)
+            radius: (element.confirmed / 1000000) > min ? (element.confirmed / 1000000) : (element.confirmed / 100000) > min ? (element.confirmed / 100000) : (element.confirmed / 10000)
           }).addTo(map).bindPopup(`<p>Country: ${element.countryregion}
                                   <br>Last Update: ${element.lastupdate}
                                   <br>Location: lat=${element.location.lat}, long=${element.location.lng}

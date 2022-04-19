@@ -14,7 +14,7 @@ export class WeatherService {
   weatherSubject: BehaviorSubject<Weather> = new BehaviorSubject<Weather>(this.weather);
   weather$: Observable<Weather> = this.weatherSubject.asObservable();
 
-  private BaseUrl = 'http://api.weatherapi.com/v1/current.json?key=813e869219fb434586295406221904';
+  private BaseUrl = 'https://api.weatherapi.com/v1/current.json?key=813e869219fb434586295406221904';
 
   getWeather(lat: number, lon: number) {
     let currentWeather!: Weather;
