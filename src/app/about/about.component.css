@@ -1,0 +1,14 @@
+.image img{
+    width: 50%;
+    border-radius: 50%;
+}
+
+i{
+    font-size: 1rem;
+    color: #fff;
+}
+
+.alink{
+    /* display: flex;
+    justify-content: center; */
+}
