@@ -1,7 +1,7 @@
 export interface Latest {
     provincestate: string;
     countryregion: string;
-    lastupdate: string;
+    lastupdate: string | "";
     location: Location;
     countrycode: Countrycode;
     confirmed: number;

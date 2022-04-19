@@ -12,6 +12,8 @@ import { AboutComponent } from './about/about.component';
 import { ChartComponent } from './chart/chart.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    LeafletModule
+    LeafletModule,
+    NgxChartsModule,
+    BrowserAnimationsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

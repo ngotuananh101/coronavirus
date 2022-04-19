@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { latLng, Map, tileLayer, circle, circleMarker,point, polygon, marker } from 'leaflet';
+import { latLng, Map, tileLayer, circle, circleMarker, point, polygon, marker } from 'leaflet';
 import { CovidService } from '../covid.service';
 import { Latest } from '../model/latest.model';
 
@@ -42,10 +42,13 @@ export class MapComponent {
     this._covid.dataResultSubject.subscribe(data => {
       this.data = data;
     });
-    this._covid.activeResultSubject.subscribe(data => {
-      this.total = data.confirmed;
-      this.deaths = data.deaths;
-      this.country = data.countryregion;
+    this._covid.activeSubject.subscribe(data => {
+      try {
+        this.total = data.confirmed;
+        this.deaths = data.deaths;
+        this.country = data.countryregion;
+      } catch (error) {
+      }
     });
   }
 
@@ -65,14 +68,15 @@ export class MapComponent {
                                 <br>Confirmed: ${element.confirmed}
                                 <br>Deaths: ${element.deaths}
                                 <br>Recovered: ${element.recovered}</p>`);
-      })});
+      })
+    });
   }
   onChange(event: any) {
     let value = event.target.value;
     this.data.forEach(element => {
       if (element.countryregion == value) {
         this.map.setView([element.location.lat, element.location.lng], 6);
-        this._covid.activeResultSubject.next(element);
+        this._covid.activeSubject.next(element);
       }
     });
   };

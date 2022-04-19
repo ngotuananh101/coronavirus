@@ -11,15 +11,16 @@ import { Latest } from '../model/latest.model';
 export class StaticComponent implements OnInit {
 
   constructor(private _covid : CovidService ) { }
-
-  data!: Latest[];
-  brief!:Brief;
+  brief:Brief = {
+    confirmed: 0, deaths: 0, recovered: 0,
+    active: 0,
+    lastUpdate: '',
+    country: 0,
+    today: 0
+  };
 
   ngOnInit(): void {
     this._covid.getData();
-    this._covid.dataResultSubject.subscribe(data => {
-      this.data = data;
-    });
     this._covid.briefResultSubject.subscribe(brief => {
       this.brief = brief;
     });
